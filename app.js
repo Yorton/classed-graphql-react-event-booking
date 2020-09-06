@@ -11,6 +11,9 @@ const isAuth = require('./middleware/is-auth');
 
 const {MONGO_USER, MONGO_PASSWORD, MONGO_DB} = require('./config');
 
+
+const PORT = process.env.PORT || 8000;
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -47,11 +50,12 @@ app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
 
-console.log("app", `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.vjqhc.mongodb.net/${MONGO_DB}?retryWrites=true&w=majority`);
                                                                        
 mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.vjqhc.mongodb.net/${MONGO_DB}?retryWrites=true&w=majority`)
 .then(()=>{
-    app.listen(8000);
+
+    console.log("app", "port = "+PORT);
+    app.listen(PORT);
 })
 .catch(err => {console.log(err);})
 
