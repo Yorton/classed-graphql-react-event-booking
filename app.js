@@ -44,6 +44,8 @@ app.get('*', (req, res) => {
 
     res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
+
+console.log("app", `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.vjqhc.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`);
                                                                        
 mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.vjqhc.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`)
 .then(()=>{
