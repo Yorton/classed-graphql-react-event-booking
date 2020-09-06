@@ -9,6 +9,8 @@ const graphQlSchema = require('./graphql/schema/index');
 const graphQlResovers = require('./graphql/resolvers/index');
 const isAuth = require('./middleware/is-auth');
 
+const {MONGO_USER, MONGO_PASSWORD, MONGO_DB} = require('./config');
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -45,9 +47,9 @@ app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
 
-console.log("app", `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.vjqhc.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`);
+console.log("app", `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.vjqhc.mongodb.net/${MONGO_DB}?retryWrites=true&w=majority`);
                                                                        
-mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.vjqhc.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`)
+mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.vjqhc.mongodb.net/${MONGO_DB}?retryWrites=true&w=majority`)
 .then(()=>{
     app.listen(8000);
 })
