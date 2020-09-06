@@ -1,0 +1,89 @@
+
+Postman:
+
+{
+    "query":"query{ login(email:\"test@test.com\", password:\"tester\"){token} }"
+}
+
+{
+    "query":"mutation{ createEvent(eventInput: {title: \"should work\", description: \"this now works!\", price: 39.99, date:\"2020-08-14T01:19:24.400Z\"}) {_id title} }"
+}
+
+
+Graphql:
+
+query{
+  login(email:"test@test.com", password: "tester"){
+    userId
+    token
+    tokenExpiration
+  }
+}
+
+query{
+  events{
+    title
+    creator{
+      email
+      createEvents{
+        _id
+        title
+      }
+    }
+  }
+}
+
+query{
+  bookings{
+    createdAt
+    event{
+      title
+      creator{
+        email
+      }
+    }
+  }
+}
+
+{"_id":{"$oid":"5f34e0d3929051165c839620"},"user":{"$oid":"5f34a2ad82da763174bfa93e"},"event":{"$oid":"5f34a8f6325e9726a416b79f"},"createdAt":{"$date":{"$numberLong":"1597300947547"}},"updatedAt":{"$date":{"$numberLong":"1597300947547"}},"__v":{"$numberInt":"0"}}
+
+
+mutation {
+  cancelBooking(bookingId: "5f34de20510bba2d58cf4cc6") {
+    title
+    creator{
+      email
+    }
+  }
+}
+
+mutation {
+  bookEvent(eventId: "5f34a8f6325e9726a416b79f") {
+    _id
+    createdAt
+    user{
+      email
+    }
+  }
+}
+
+
+
+mutation {
+  createUser(userInput: {email: "test@test.com", password: "tester"}) {
+    _id
+    email
+    password
+  }
+}
+
+
+mutation {
+  createEvent(eventInput: {title: "Another Event!", description: "this is just another test", price: 999.99, date: "2020-08-14T01:19:24.400Z"}) {
+    title
+    creator{
+	email
+    }
+  }
+}
+
